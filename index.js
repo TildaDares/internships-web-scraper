@@ -9,12 +9,12 @@ app.get("/", function (req, res) {
   res.json("An Internship Web Scraper built for MLH Orientation Hackathon");
 });
 
-app.get("/results", (req, res) => {
+app.get("/results/:role?", (req, res) => {
   const internships = [];
   const promises = [];
 
   for (let pageNumber = 0; pageNumber < 1000; pageNumber += 25) {
-    const url = `https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=internship&location=Worldwide&geoId=92000000&trk=public_jobs_jobs-search-bar_search-submit&currentJobId=2931031787&position=1&pageNum=0&start=${pageNumber}`;
+    const url = `https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=internship%20${req.params.role}&location=Worldwide&geoId=92000000&trk=public_jobs_jobs-search-bar_search-submit&currentJobId=2931031787&position=1&pageNum=0&start=${pageNumber}`;
 
     promises.push(
       axios(url)
@@ -36,14 +36,23 @@ app.get("/results", (req, res) => {
               .find("span.job-search-card__location")
               .text()
               .trim();
-
             const link = $(element).find("a.base-card__full-link").attr("href");
+            const logo = $(element)
+              .find("img.artdeco-entity-image ")
+              .attr("data-delayed-url");
+            console.log(logo);
+            const datePosted = $(element)
+              .find(".job-search-card__listdate")
+              .text()
+              .trim();
 
             internships.push({
               title,
               company,
               location,
               link,
+              logo,
+              datePosted,
             });
           });
 
