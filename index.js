@@ -1,9 +1,13 @@
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const axios = require("axios");
 const cheerio = require("cheerio");
 const express = require("express");
 
 const app = express();
+
+app.get("/", function (req, res) {
+  res.json("An Internship Web Scraper built for MLH Orientation Hackathon");
+});
 
 app.get("/results", (req, res) => {
   const internships = [];
