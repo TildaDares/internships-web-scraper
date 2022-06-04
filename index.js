@@ -4,9 +4,9 @@ const cheerio = require("cheerio");
 const express = require("express");
 const cors = require("cors");
 
-app.use(cors());
-
 const app = express();
+
+app.use(cors());
 
 app.get("/", function (req, res) {
   res.json("An Internship Web Scraper built for MLH Orientation Hackathon");
