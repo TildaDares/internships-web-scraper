@@ -16,4 +16,4 @@ To run this project on your local machine, do the following:
 - Run `cd internships-web-scraper` to navigate into the project folder.
 - Run `npm i` to install all the packages.
 - Start the server by running `npm run start`
-- Open http://localhost:8000/results with your browser to see the results of the scrape in your terminal.
+- Open <http://localhost:8000/results> with your browser to see the results of the scrape in your terminal.
