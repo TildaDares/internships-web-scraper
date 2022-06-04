@@ -6,7 +6,7 @@ Internships Web Scraper API is a LinkedIn Web Scraper that scrapes the page for 
 
 GET `/results` (get all internships)
 
-GET /quotes/:role (get internships by role)
+GET `/results/:role` (get internships by role)
 
 ## Development
 
