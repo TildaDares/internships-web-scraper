@@ -15,7 +15,7 @@ app.get("/", function (req, res) {
 app.get("/results/:role?", (req, res) => {
   const promises = [];
 
-  for (let pageNumber = 0; pageNumber < 250; pageNumber += 25) {
+  for (let pageNumber = 0; pageNumber <= 350; pageNumber += 25) {
     const url = `https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=internship%20${req.params.role}&location=Worldwide&geoId=92000000&trk=public_jobs_jobs-search-bar_search-submit&currentJobId=2931031787&position=1&pageNum=0&start=${pageNumber}`;
     promises.push(
       axios(url)
@@ -63,7 +63,13 @@ app.get("/results/:role?", (req, res) => {
     );
   }
 
-  Promise.all(promises).then((result) => res.json(...result));
+  Promise.all(promises).then((result) => {
+    let arr = [];
+    for (let i = 0; i < result.length; i++) {
+      arr.push(...result[i]);
+    }
+    return res.json(arr);
+  });
 });
 
 app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
