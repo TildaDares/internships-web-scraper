@@ -63,13 +63,15 @@ app.get("/results/:role?", (req, res) => {
     );
   }
 
-  Promise.all(promises).then((result) => {
-    let arr = [];
-    for (let i = 0; i < result.length; i++) {
-      arr.push(...result[i]);
-    }
-    return res.json(arr);
-  });
+  Promise.all(promises)
+    .then((result) => {
+      let arr = [];
+      for (let i = 0; i < result.length; i++) {
+        arr.push(...result[i]);
+      }
+      return res.json(arr);
+    })
+    .catch((err) => console.log(err.message));
 });
 
 app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
